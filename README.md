@@ -2,8 +2,8 @@
 
 ## Student Scope
 
-- IAM username: `terraform-week11`
-- Resource prefix: `w12-terraform-week11-`
+- IAM username: `charles`
+- Resource prefix: `w12-charles-`
 
 ## Repository Structure
 

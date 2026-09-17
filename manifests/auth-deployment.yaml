@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: w12-charles-auth
+  namespace: dev
+  labels:
+    app: w12-charles-auth
+    cloudpros.io/lab: week-12
+    cloudpros.io/student: charles
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: w12-charles-auth
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: w12-charles-auth
+        cloudpros.io/lab: week-12
+        cloudpros.io/student: charles
+    spec:
+      containers:
+        - name: auth
+          image: public.ecr.aws/docker/library/nginx:1.27-alpine
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - secretRef:
+                name: ledgeway-env
+          resources:
+            requests:
+              cpu: 5m
+              memory: 16Mi
+            limits:
+              cpu: 25m
+              memory: 32Mi
